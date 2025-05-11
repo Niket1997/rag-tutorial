@@ -1,0 +1,20 @@
+# install uv - python package manager
+brew install uv
+
+# create a new project
+uv init rag-tutorial
+
+# install dependency - langchain-community
+uv add langchain-community
+
+# install dependency - langchain-qdrant
+uv add langchain-qdrant
+
+# install dependency - python-dotenv
+uv add python-dotenv
+
+# install dependency - langchain-openai
+uv add langchain-openai
+
+# install dependency - black
+uv add black
