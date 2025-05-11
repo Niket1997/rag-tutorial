@@ -1,7 +1,7 @@
 from utils import get_collection_name, get_vector_store, collection_exists, llm
 
 # similarity threshold
-SIMILARITY_THRESHOLD = 0.7
+SIMILARITY_THRESHOLD = 0.5
 
 
 # retrieve the answer
@@ -19,14 +19,16 @@ def retrieve_answer(query: str, file_name: str) -> str:
             # Get documents with their similarity scores
             docs = vector_store.similarity_search_with_score(query, k=5)
 
+            num_relevant_docs = 0
             for doc, score in docs:
                 if score >= SIMILARITY_THRESHOLD:
                     system_prompt += f"""
                     Document: {doc.page_content}
                     """
+                    num_relevant_docs += 1
 
             print(
-                f"Found {len(docs)} documents with similarity score >= {SIMILARITY_THRESHOLD}"
+                f"🌀🌀🌀 Found {num_relevant_docs} documents with similarity score >= {SIMILARITY_THRESHOLD}"
             )
 
         messages = [("system", system_prompt), ("user", query)]
