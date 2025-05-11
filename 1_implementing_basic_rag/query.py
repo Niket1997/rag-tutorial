@@ -1,9 +1,4 @@
-from utils import (
-    get_collection_name,
-    get_vector_store,
-    collection_exists,
-    llm
-)
+from utils import get_collection_name, get_vector_store, collection_exists, llm
 
 # similarity threshold
 SIMILARITY_THRESHOLD = 0.7
@@ -30,7 +25,9 @@ def retrieve_answer(query: str, file_name: str) -> str:
                     Document: {doc.page_content}
                     """
 
-            print(f"Found {len(docs)} documents with similarity score >= {SIMILARITY_THRESHOLD}")
+            print(
+                f"Found {len(docs)} documents with similarity score >= {SIMILARITY_THRESHOLD}"
+            )
 
         messages = [("system", system_prompt), ("user", query)]
 

@@ -1,5 +1,5 @@
 import os
-from langchain_qdrant import QdrantVectorStore, RetrievalMode
+from langchain_qdrant import QdrantVectorStore
 from qdrant_client import QdrantClient
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
@@ -32,8 +32,10 @@ qdrant_client = QdrantClient(
 # create a collection if it doesn't exist
 def create_collection_if_not_exists(collection_name: str):
     # check if collection exists
-    if not qdrant_client.collection_exists(collection_name):
+    if not collection_exists(collection_name):
         # create the collection if it doesn't exist
+        # Note, here the dimensions 1536 is corresponding to the embedding model we chose
+        # which is text-embedding-3-small
         qdrant_client.create_collection(
             collection_name=collection_name,
             vectors_config=VectorParams(size=1536, distance=Distance.COSINE),
